@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <title>The Event Sheet</title>
+</head>
+<body>
+<h1 class="center">The Menu Sheet</h1>
+<img src="../Media/menusheet1.png" alt="The Menu Sheet" style="width:800px;height:450px;" class="imgcent">
+<img src="../Media/menusheet2.png" alt="The Menu Sheet" style="width:800px;height:170px;" class="imgcent">
+<h1 class="center">The Game Sheet</h1>
+<img src="../Media/gamesheet1.png" alt="The Game Sheet" style="width:800px;height:250px;" class="imgcent">
+<img src="../Media/gamesheet2.png" alt="The Game Sheet" style="width:800px;height:550px;" class="imgcent">
+<img src="../Media/gamesheet3.png" alt="The Game Sheet" style="width:800px;height:540px;" class="imgcent">
+<img src="../Media/gamesheet4.png" alt="The Game Sheet" style="width:800px;height:220px;" class="imgcent">
+<img src="../Media/gamesheet5.png" alt="The Game Sheet" style="width:800px;height:550px;" class="imgcent">
+<img src="../Media/gamesheet6.png" alt="The Game Sheet" style="width:800px;height:400px;" class="imgcent">
+<img src="../Media/gamesheet7.png" alt="The Game Sheet" style="width:800px;height:500px;" class="imgcent">
+<h1 class="center">The Menu Sheet</h1>
+<p class="center">There are 3 categories that each event is sorted into with only 1 variable. The variable is to determine whether the play button's animation is done or not.</p> 
+<h2 class="center">CoolButtons</h2>
+<p class="center">These all controls the buttons on the menu. Pressing the play button plays its animation and sets PressOver to true. Setting PressOver to true triggers the cool fade to black effect before switching to the game layout. Pressing the "MOAR GAMES" button brings the player to my <a href="https://2025ericl944.github.io/2025ericlintrogame.github.io/">first game's website</a>. Pressing the save button will save the game's current state and sets the button's frame to 1. This code only works if the button's animation frame is 0, which it will reset to in 15 seconds. The load button functions in the exact same way.</p> 
+<h2 class="center">Other</h2>
+<p class="center">This is literally entirely dedicated to the High Score text. Every in-game tick, sets the text to "High Score:" followed by the player's current high score in the game.</p> 
+<h2 class="center">OnStart</h2>
+<p class="center">Every game I've made has one of these. Upon the player booting up the game, the game will *Deep Breath* stop the play button's animation and sets it to frame 0, does the same for the save and load buttons, sets the Darkness's opacity to 0, and sets the variable Pressover to false. This was only the warm-up. Time for the Game Sheet. Oh Boy.</p> 
+<h1 class="center">The Game Sheet</h1>
+<p class="center">There are 7 categories and 14 variables. Are you ready? Let's do this.</p> 
+<h2 class="center">Variables</h2>
+<p class="center">The SpikeSpeed variable determines the speed of the falling spikes, the Health variable determines the player's health (Duh.), and the IsAlive variable determines if the player is alive or not. The Score variable determines the current score, SpikeMin determines the lower limit of the range of time in which spikes can spawn (In Seconds), and the SpikeMax variable determines the upper limit of the spike spawn time (Also in Seconds). The Times2Powerup variable determines whether the X2 Power up spawns, the ScoreUp variable determines how much the score goes up by per spike that you dodge. All of the other booleans ranging from Bomb to Freeze determine whether the respective power ups spawn or not. IsPlayerMove determines whether the Player is able to move, and lastly, Highscore determines the High Score in the current game/save.</p> 
+<h2 class="center">On Start</h2>
+<p class="center">This, like its' menu counterpart, determines what happens when the game is booted up. It will *Deep Breath* Stop all of the buttons' animations, set their frames to 0, and set every variable apart from HighScore to their default values.</p> 
+<h2 class="center">Controls and Score</h2>
+<p class="center">This controls the movement and score counting in the game. Every tick that the touchscreen is being touched or the mouse is being held down AND IsPlayerMove = Yes, the game will set the player character's X position to that of the mouse or touch. Every tick, the game will also set the Score and High Score texts to their proper values. Lastly, when the player hits a x2 Score Power up, the amount the score goes up by will be doubled (up to 150), a special yellow glowing effect will appear (Opacity 75), and the power up will be destroyed. After a minute of this very cool gold rush, the yellow glowing effect's opacity will be set back to 0 and the ScoreUp variable will be reset to 75.</p> 
+<h2 class="center">Stalagtites</h2>
+<p class="center">That's right, an ENTIRE group of code dedicated to the falling spikes. Let's do this. So first off, if the player is alive, then every interval of time within the range of SpikeMin and SpikeMax (in seconds) will have the game spawn 3 spikes, at varying x and y positions. After that, every tick, the spikes will fall at SpikeSpeed pixels per tick. This line also applies to the insta-kill spikes, which will be brought up later. Next, if either spike hits the spike removal block below the layout, they will be destroyed and ScoreUp points will be added to the Score. If the normal spikes hit the player, they will be destroyed, 100 will be subtracted from the score, and 1 will be subtracted from the player's Health. Every 30 seconds, the game will add 1 to SpikeSpeed, making the spikes move faster. Next up are even more things that can destroy the spikes. The explosion from the Bomb Power up destroys them but adds no points to the Score, and the Shield from the Shield power up does the same. If the Boolean Expurgator is True, then every interval of time between 2 and 5 seconds, the game will create 2 insta-kill (Or Expurgator) spikes at random X and Y values. Now, for Expurgator to be true, the game waits until the player's current score is above 10,000, which will then cause the game to set Expurgator to be true. Upon the player touching one of these Expurgator spikes, the spike will immediately set the player's health to 0, remove 5000 from the score, and then destroy itself. Lastly, once the score goes above or equal to 100,000, SpikeMin will be lowered to 0.3 and SpikeMax will be set to 0.6, making the spikes spawn more frequently.</p> 
+<h2 class="center">Health</h2>
+<p class="center">A nice break from long paragraphs about spikes. We will now go over how the Health system works. Every tick, the Healthbar will be set to its' frame that corresponds to the player's current health. If the player hits a Health Power-Up, 1 will be added to Health and the Power-Up will be destroyed.</p> 
+<h2 class="center">PowerUps</h2>
+<p class="center">Now for a long paragraph about power ups (And one power down). Oh boy. On the start of the layout, the game will wait 10 seconds and then set Shield to true, wait 20 seconds and set Freeze to true, wait 40 seconds and set Bomb to true, and wait 40 more seconds and set Times2Powerup to true. The next few lines of code control when power ups spawn. The game first checks to see if the player is alive, and then waits an interval of time that varies depending on the power up. They also spawn at different places, so basically the code isn't 100% copy-pasted. The next few lines relate to the movement, which checks if the power-up variables are set to true before allowing them to move. All the power ups move at the same speed as the spikes, but the movement checks are different for the Health power up, which moves every tick instead of checking for a variable like the others. Next, if the power ups hit the blue bar at the bottom or an explosion from the bomb, they will be destroyed. Next is what happens if the player uses the power ups. If the player gets the Bomb, an explosion will spawn at the Bomb's coordinates and the bomb will be destroyed. After 10 seconds, the explosion will be destroyed. If the player gets the Shield, a shield will be spawned to protect the player and the power up itself will be destroyed. The Shield's size will be set to 125 x 125 pixels and its' opacity will be set to 75%. After 10 seconds, the shield will be destroyed. Every tick, the Shield will be set to the player's position. Lastly, if the player gets the Freeze power up, IsPlayerMove will be set to No and the Freeze will be destroyed. After 3 seconds, IsPlayerMove will be set to Yes.</p>
+<h2 class="center">Button</h2>
+<p class="center">Next is for the buttons on the game over GUI. Once the player clicks or taps the Retry Button and its' opacity is 100%, the button's animation frame frame will be set to 1 for 0.3 seconds. Afterwards, the frame will be reset to 0, and the system will wait 0.1 seconds before restarting the layout. If the player taps the Home Button and its' opacity is 100%, the same exact thing will happen except for the end of the code, where instead of restarting the layout, it will switch to the Menu layout.</p>
+<h2 class="center">GameOver</h2>
+<p class="center">Lastly, is what happens when the player gets a Game Over. The moment their Health is equal to 0, SpikeSpeed will be set to 0, IsAlive will be set to 0, and after 2 more seconds, the Game Over GUI will become visible (Opacity 100). The code then checks to see if the current score is higher than the player's current High Score. If that's the case, then HighScore will be set to the Player's current Score.</p>
+
+<h1 class="center">Back</h1>
+<a class="coolbutton" style="margin-left:865px;" href="../index.html">Back to Main Page</a>
+
+</body>
+</html>
